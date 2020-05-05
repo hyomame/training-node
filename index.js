@@ -2,7 +2,7 @@
 
 const cli = require('cac')()
 
-const expenses = require('./commands/expenses.js')
+const expenses = require('./commands/expenses')
 
 cli
   .command('expenses', '家計簿を作成する')
