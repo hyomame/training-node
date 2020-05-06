@@ -1,11 +1,14 @@
 'use strict'
 
+const cli = require('cac')()
 const inquirer = require('inquirer')
 
 const getItems = require('./getItems')
 
-module.exports.createExpenses = async () => {
+const createExpenses = async () => {
   const expenseItems = getItems.getItems()
+
+  console.log('家計簿を作成します')
 
   const questions = [{
     type: 'number',
@@ -45,5 +48,16 @@ module.exports.createExpenses = async () => {
   message += '累計:' + total + '\n'
   message += '----------'
 
-  return message
+  console.log(message)
+  return true
 }
+
+cli
+  .command('create', '家計簿を作成する')
+  .action(() => {
+    createExpenses()
+  })
+
+cli.parse()
+
+module.exports.createExpenses = createExpenses

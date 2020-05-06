@@ -28,14 +28,6 @@ module.exports.modeSelect = async () => {
     } else {
       console.log()
       const result = await eval(answers.mode + '.' + answers.mode + '()')
-
-      try {
-        if (result) {
-          console.log(result)
-        }
-      } catch(error) {
-        console.error(error)
-      }
       console.log()
     }
   } while(hasLooped)

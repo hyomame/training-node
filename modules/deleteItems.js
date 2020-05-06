@@ -1,11 +1,12 @@
 'use strict'
 
+const cli = require('cac')()
 const inquirer = require('inquirer')
 
 const getItems = require('./getItems')
 const setItems = require('./setItems')
 
-module.exports.deleteItems = async () => {
+const deleteItems = async () => {
   const expenseItems = getItems.getItems()
 
   const answers = await inquirer.prompt([
@@ -23,5 +24,16 @@ module.exports.deleteItems = async () => {
   }
   setItems.setItems(expenseItems)
 
-  return '削除が完了しました'
+  console.log('削除が完了しました')
+  return true
 }
+
+cli
+  .command('delete', '家計簿の項目を削除する')
+  .action(() => {
+    deleteItems()
+  })
+
+cli.parse()
+
+module.exports.deleteItems = deleteItems
